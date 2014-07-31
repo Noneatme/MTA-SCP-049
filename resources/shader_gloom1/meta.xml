@@ -1,0 +1,12 @@
+<meta>
+	<info description="Shader gloom" version="0.0.2" type="script" />
+	<script src="c_postprocess.lua" type="client" />
+	<file src="grain.fx" type="client" />
+	<file src="shader_clear.fx" type="client" />
+	<file src="creepy_light.fx" type="client" />
+	<file src="noise64.tga" type="client" />
+	<file src="vignette1.dds" type="client" />
+	<file src="mta-helper.fx" type="client" />
+	
+	    <min_mta_version server="1.3.0-9.04431" client="1.3.0-9.04431"></min_mta_version>
+</meta>

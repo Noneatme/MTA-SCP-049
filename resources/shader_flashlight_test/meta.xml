@@ -1,0 +1,15 @@
+<meta>
+	<info name="Shader Flashlight test" description="The flashlight resource." author="Ren712" version="0.8.5" type="script" />
+	<script src="c_shader_light.lua" type="client" />
+	<script src="s_shader_light.lua" type="server" />
+	<file src="shaders/shader_light.fx" type="client" />
+	<file src="shaders/mta-helper.fx" type="client" />
+	<file src="textures/cubebox.dds" type="client" />
+	<file src="shaders/shader_jaroovka.fx" type="client" />
+	<file src="shaders/shader_null.fx" type="client" />
+	<file src="shaders/flash_light_rays.fx" type="client" />
+	<file src="objects/flashlight.txd" type="client" />
+	<file src="objects/flashlight.dff" type="client" />
+	<file src="sounds/switch.wav" type="client" />
+	<include resource="bone_attach" />
+</meta>
