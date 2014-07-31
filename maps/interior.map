@@ -1,0 +1,4 @@
+<map edf:definitions="editor_main">
+    <object id="object (ab_casdorLok) (1)" interior="2" collisions="true" alpha="255" doublesided="false" model="3089" scale="1" dimension="0" posX="2541.19995" posY="-1305.5" posZ="1025.40002" rotX="0" rotY="0" rotZ="90"></object>
+    <object id="object (ab_casdorLok) (2)" interior="2" collisions="true" alpha="255" doublesided="false" model="3089" scale="1" dimension="0" posX="2541.19995" posY="-1302.5" posZ="1025.40002" rotX="0" rotY="0" rotZ="270"></object>
+</map>

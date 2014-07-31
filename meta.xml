@@ -1,0 +1,81 @@
+<meta>
+    <info author="Noneatme" type="gamemode" version="1.0.0" />
+    <include resource="shader_gloom1" />
+    <include resource="shader_flashlight_test" />
+    
+    <!-- SERVER SIDE FILES -->
+    <script src="server/shared.utils.class.lua" type="server" />
+    <script src="server/CLogger.lua" type="server" />
+    <script src="server/CPlayer.lua" type="server" />
+    <script src="server/CMapLoader.lua" type="server" />
+    <script src="server/CSpawnManager.lua" type="server" />
+    <script src="server/CSettings.lua" type="server" />
+    
+    <script src="server/CObjectCreator.lua" type="server" />
+    
+    <!-- CLIENT SIDE FILES -->
+    <script src="client/shared.utils.class.lua" type="server" />
+    
+    <script src="client/CLogger.lua" type="client" />
+    <script src="client/CMapLoader.lua" type="client" />
+    <script src="client/CSoundManager.lua" type="client" />
+    <script src="client/CKeyBinds.lua" type="client" />
+    <script src="client/CEgo.lua" type="client" />
+    <script src="client/CTextureReplacer.lua" type="client" />
+    <script src="client/CEffects.lua" type="client" />
+    <script src="client/CDoors.lua" type="client" />
+    <script src="client/C3DImageDrawer.lua" type="client" />
+    <script src="client/CCardRender.lua" type="client" />
+    <script src="client/CMessageBox.lua" type="client" />
+    <script src="client/CTrigger.lua" type="client" />
+    <script src="client/CDevelopment.lua" type="client" />
+    <script src="client/CAlien.lua" type="client" />
+    <script src="client/CMotionBlur.lua" type="client" />
+	<script src="client/CWinText.lua" type="client" />
+
+      
+    <script src="client/CObjectCreator.lua" type="client" />
+    
+    
+    <!-- MAPS -->
+    <custommap src="maps/scp-088-map.map" />
+    
+    <!-- DOWNLOADABLE CONTENT -->
+    <file src="LICENSE.txt" />
+    
+    <!-- SHADERS -->
+    <file src="files/shaders/texture.fx" />
+    <file src="files/shaders/motion.fx" />
+
+    
+    <!-- TEXTURES -->
+    <file src="files/textures/colt.png" />
+    
+    <!-- Models -->
+    <file src="files/models/colt.dff" />
+    <file src="files/models/alien.dff" />
+    <file src="files/models/alien.txd" />
+    <!-- IMAGES -->
+    <file src="files/images/warning1.jpg" />
+    <file src="files/images/blood.png" />
+    
+    <!-- FONTS -->
+    <file src="files/fonts/FEASFBRG.TTF" />
+    
+    <!-- SOUNDS -->
+    <file src="files/sounds/door_close.mp3" />
+    <file src="files/sounds/door_open.mp3" />
+    <file src="files/sounds/key.mp3" />
+    <file src="files/sounds/scream1.mp3" />
+    <file src="files/sounds/scream2.mp3" />
+    <file src="files/sounds/liege.mp3" />
+    <file src="files/sounds/rolly.mp3" />
+    <file src="files/sounds/HorrorAction22.mp3" />
+    <file src="files/sounds/boom.mp3" />
+    <file src="files/sounds/schrank1.ogg" />
+    <file src="files/sounds/static.mp3" />
+    <file src="files/sounds/HorrorAction2.mp3" />
+    <file src="files/sounds/fuzzle.mp3" />
+     
+    <min_mta_version server="1.3.0-9.04431" client="1.3.0-9.04431"></min_mta_version>
+</meta>

@@ -1,0 +1,45 @@
+-- #######################################
+-- ## Project: MTA:scp-088				##
+-- ## Name: Script.lua					##
+-- ## Author: Noneatme					##
+-- ## Version: 1.0						##
+-- ## License: See top Folder			##
+-- #######################################
+
+-- FUNCTIONS / METHODS --
+
+local cFunc = {};		-- Local Functions 
+local cSetting = {};	-- Local Settings
+
+Script = {};
+Script.__index = Script;
+
+--[[
+
+]]
+
+-- ///////////////////////////////
+-- ///// New 				//////
+-- ///// Returns: Object	//////
+-- ///////////////////////////////
+
+function Script:New(...)
+	local obj = setmetatable({}, {__index = self});
+	if obj.Constructor then
+		obj:Constructor(...);
+	end
+	return obj;
+end
+
+
+-- ///////////////////////////////
+-- ///// Constructor 		//////
+-- ///// Returns: void		//////
+-- ///////////////////////////////
+
+function Script:Constructor(...)
+	
+	logger:OutputInfo("[CALLING] Script: Constructor");
+end
+
+-- EVENT HANDLER --
