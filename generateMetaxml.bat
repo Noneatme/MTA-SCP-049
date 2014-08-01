@@ -1,0 +1,1 @@
+java -jar "F:\Google Drive\Workspace\metaXMLGenerator\generator.jar" "F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049"

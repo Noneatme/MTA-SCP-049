@@ -62,25 +62,43 @@ local removeList = {
 
 ---------------------------------------------------------------------------------------------------
 --Updates light positions and rotation of the light direction
+
+local shader_custom_enabled = true;
+
 function renderLight()
 	local thisPed = localPlayer
 	if light_shader[thisPed] then
-		xx1, yy1, zz1, lxx1, lyy1, lzz1,rl = getCameraMatrix()
-		x1, y1, z1 = getPedBonePosition ( thisPed, 24 )
-		lx1, ly1, lz1 = getPedBonePosition ( thisPed, 25 )
+			xx1, yy1, zz1, lxx1, lyy1, lzz1,rl = getCameraMatrix()
+			x1, y1, z1 = getPedBonePosition ( thisPed, 24 )
+			lx1, ly1, lz1 = getPedBonePosition ( thisPed, 25 )
+			
+						
+			if not(shader_custom_enabled) then
+				-- Well, it works xD
+				x1, y1, z1 = -1000, -1000, -1000
+				lx1, ly1, lz1 = -1000, -1000, -1000
+				
+				dxSetShaderValue (shader_jaroovka[thisPed],"lightColor",{0, 0, 0, 0})
+				dxSetShaderValue (shader_rays[thisPed],"lightColor",{0, 0, 0, })
+				
+			else
+				dxSetShaderValue (shader_jaroovka[thisPed],"lightColor",lightColor)
+				dxSetShaderValue (shader_rays[thisPed],"lightColor",lightColor)
+			end
 
-		local yaw = math.atan2(lx1-x1,ly1-y1) 
-		local pitch = (math.atan2(lz1-z1, math.sqrt(((lx1-x1) * (lx1-x1)) + ((ly1-y1) * (ly1-y1))))) 
-		local roll = 0
-		local movx=xx1-x1 
-		local movy=yy1-y1
-		local movz=zz1-z1	   
+			local yaw = math.atan2(lx1-x1,ly1-y1) 
+			local pitch = (math.atan2(lz1-z1, math.sqrt(((lx1-x1) * (lx1-x1)) + ((ly1-y1) * (ly1-y1))))) 
+			local roll = 0
+			local movx=xx1-x1 
+			local movy=yy1-y1
+			local movz=zz1-z1	   
 		
-		dxSetShaderValue ( light_shader[thisPed],"rotate",yaw,roll,pitch)	
-		dxSetShaderValue(light_shader[thisPed],"alterPosition",movx,movy,movz)
+			dxSetShaderValue ( light_shader[thisPed],"rotate",yaw,roll,pitch)	
+			dxSetShaderValue(light_shader[thisPed],"alterPosition",movx,movy,movz)
 			
 			setElementInterior(flashlight[thisPed], getElementInterior(localPlayer))
 			setElementDimension(flashlight[thisPed], getElementDimension(localPlayer))
+
 		end											
 end
 
@@ -169,27 +187,122 @@ function playSwitchSound(this_player)
 end
 
 function flashLightEnable(isEN,this_player)
-if isEN==true then
-		isFLen[this_player]=isEN	
-	else
-		isFLen[this_player]=isEN	
-	end
+	isFLen[this_player]=isEN	
 end
 
 function flashLightSwitch(isON,this_player)
-if isElementStreamedIn(this_player) and isFLen[this_player] then  playSwitchSound(this_player) end
-if isON then
+	if isElementStreamedIn(this_player) and isFLen[this_player] then  playSwitchSound(this_player) end
+	if isON then
 		isFlon[this_player]=true
 	else
 		isFlon[this_player]=false
 	end
 end
 
+local flickerTimer;
+local stopTimer;
+
+function flashLightFlicker(iTimeMS)
+	if(isTimer(flickerTimer)) then
+		killTimer(flickerTimer);
+		killTimer(stopTimer);
+	end
+	
+	local function flicker()
+		if(isTimer(stopTimer)) then
+			shader_custom_enabled = not(shader_custom_enabled);
+			flickerTimer = setTimer(flicker, math.random(50, 250), 1);
+		else
+			shader_custom_enabled = true;
+		end
+	end
+	
+	stopTimer	= setTimer(function() end, iTimeMS, 1)
+	flicker()
+end
+
+function stopFlashLightFlicker()
+	killTimer(flickerTimer);
+	killTimer(stopTimer);
+		
+	shader_custom_enabled = true;
+end
+
+local fadeTimer;
+local cr, cg, cb, ca			= 0, 0, 0, 0
+local curR, curG, curB, curA 	= lightColor[1]*255, lightColor[2]*255, lightColor[3]*255, lightColor[4]*255;
+local customDefaultAM 	= 2.5;
+local customAM 			= customDefaultAM;
+
+function fadeToColor(arrayTo, iMS, customAM_)
+	if(isTimer(fadeTimer)) then
+		killTimer(fadeTimer);
+		removeEventHandler("onClientRender", root, fadeFLColor);
+	end
+	
+	if not(customAM_) then
+		customAM = customDefaultAM;
+	else
+		customAM = customAM_;
+	end
+
+	cr, cg, cb, ca = arrayTo[1], arrayTo[2], arrayTo[3], arrayTo[4];
+	addEventHandler("onClientRender", root, fadeFLColor);
+	
+	fadeTimer = setTimer(function()
+		cr, cg, cb, ca = lightColor[1]*255, lightColor[2]*255, lightColor[3]*255, lightColor[4]*255;
+	end, iMS, 1)
+end
+
+function fadeFLColor()
+	local am = customAM;
+	
+	if(curR > cr) then
+		curR = curR-am;
+	else
+		curR = curR+am;
+	end
+	
+	if(curG > cg) then
+		curG = curG-am;
+	else
+		curG = curG+am;
+	end
+	
+	if(curB > cb) then
+		curB = curB-am;
+	else
+		curB = curB+am;
+	end
+	
+	if(curA > ca) then
+		curA = curA-am;
+	else
+		curA = curA+am;
+	end
+	
+	--[[curA = math.floor(curA);
+	curR = math.floor(curR);
+	curB = math.floor(curB);
+	curG = math.floor(curG);
+	]]
+	local color = {curR/255, curG/255, curB/255, curA/255};
+	
+	dxSetShaderValue (shader_jaroovka[localPlayer],"lightColor",color)
+	dxSetShaderValue (shader_rays[localPlayer],"lightColor",color)
+	dxSetShaderValue ( light_shader[localPlayer],"lightColor",color)
+	
+	
+	if(curR == cr and curG == cg and curB == cb and curA == ca) then
+		removeEventHandler("onClientRender", root, fadeFLColor);
+	end	
+end
+
 
 function whenPlayerQuits(this_player)
-destroyWorldLightShader(this_player) 
-destroyFlashlightModel(this_player) 
-destroyFlashLightShader(this_player)  
+	destroyWorldLightShader(this_player) 
+	destroyFlashlightModel(this_player) 
+	destroyFlashLightShader(this_player)  
 end
 
 ---------------------------------------------------------------------------------------------------

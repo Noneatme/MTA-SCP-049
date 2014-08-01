@@ -1,81 +1,125 @@
+<!-- XML Generator Version 0.0.1 -->
+<!-- Generation Date: 01.08.2014 20:37:16 -->
 <meta>
-    <info author="Noneatme" type="gamemode" version="1.0.0" />
-    <include resource="shader_gloom1" />
-    <include resource="shader_flashlight_test" />
-    
-    <!-- SERVER SIDE FILES -->
-    <script src="server/shared.utils.class.lua" type="server" />
-    <script src="server/CLogger.lua" type="server" />
-    <script src="server/CPlayer.lua" type="server" />
-    <script src="server/CMapLoader.lua" type="server" />
-    <script src="server/CSpawnManager.lua" type="server" />
-    <script src="server/CSettings.lua" type="server" />
-    
-    <script src="server/CObjectCreator.lua" type="server" />
-    
-    <!-- CLIENT SIDE FILES -->
-    <script src="client/shared.utils.class.lua" type="server" />
-    
-    <script src="client/CLogger.lua" type="client" />
-    <script src="client/CMapLoader.lua" type="client" />
-    <script src="client/CSoundManager.lua" type="client" />
-    <script src="client/CKeyBinds.lua" type="client" />
-    <script src="client/CEgo.lua" type="client" />
-    <script src="client/CTextureReplacer.lua" type="client" />
-    <script src="client/CEffects.lua" type="client" />
-    <script src="client/CDoors.lua" type="client" />
-    <script src="client/C3DImageDrawer.lua" type="client" />
-    <script src="client/CCardRender.lua" type="client" />
-    <script src="client/CMessageBox.lua" type="client" />
-    <script src="client/CTrigger.lua" type="client" />
-    <script src="client/CDevelopment.lua" type="client" />
-    <script src="client/CAlien.lua" type="client" />
-    <script src="client/CMotionBlur.lua" type="client" />
-	<script src="client/CWinText.lua" type="client" />
-
-      
-    <script src="client/CObjectCreator.lua" type="client" />
-    
-    
-    <!-- MAPS -->
-    <custommap src="maps/scp-088-map.map" />
-    
-    <!-- DOWNLOADABLE CONTENT -->
-    <file src="LICENSE.txt" />
-    
-    <!-- SHADERS -->
-    <file src="files/shaders/texture.fx" />
-    <file src="files/shaders/motion.fx" />
-
-    
-    <!-- TEXTURES -->
-    <file src="files/textures/colt.png" />
-    
-    <!-- Models -->
-    <file src="files/models/colt.dff" />
-    <file src="files/models/alien.dff" />
-    <file src="files/models/alien.txd" />
-    <!-- IMAGES -->
-    <file src="files/images/warning1.jpg" />
-    <file src="files/images/blood.png" />
-    
-    <!-- FONTS -->
-    <file src="files/fonts/FEASFBRG.TTF" />
-    
-    <!-- SOUNDS -->
-    <file src="files/sounds/door_close.mp3" />
-    <file src="files/sounds/door_open.mp3" />
-    <file src="files/sounds/key.mp3" />
-    <file src="files/sounds/scream1.mp3" />
-    <file src="files/sounds/scream2.mp3" />
-    <file src="files/sounds/liege.mp3" />
-    <file src="files/sounds/rolly.mp3" />
-    <file src="files/sounds/HorrorAction22.mp3" />
-    <file src="files/sounds/boom.mp3" />
-    <file src="files/sounds/schrank1.ogg" />
-    <file src="files/sounds/static.mp3" />
-    <file src="files/sounds/HorrorAction2.mp3" />
-    <file src="files/sounds/fuzzle.mp3" />
-     
-    <min_mta_version server="1.3.0-9.04431" client="1.3.0-9.04431"></min_mta_version>
+	<!-- Info line -->
+	<info author='Noneatme' version='1.5.0' type='gamemode' name='SCP-049' description='The SCP-049 Gamemode for MTA:SA'/>
+	
+	<!-- Meta settings -->
+	<oop>false</oop>
+	<min_mta_version client='1.3.5' server='1.3.5'/>
+	<sync_map_element_data>false</sync_map_element_data>
+	
+	<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049 -->
+		<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client -->
+		<script src='client\utils\shared.utils.class.lua' type='shared' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\downloader -->
+			<script src='client\downloader\cDownloadManager.lua' type='client' cache='false'/>
+		
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\entitys -->
+			<script src='client\entitys\CAlien.lua' type='client' cache='false'/>
+			<script src='client\entitys\CDoors.lua' type='client' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\map -->
+			<script src='client\map\CMapLoader.lua' type='client' cache='false'/>
+			<script src='client\map\CRemover.lua' type='client' cache='false'/>
+			<script src='client\map\CTrigger.lua' type='client' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\render -->
+			<script src='client\render\C3DImageDrawer.lua' type='client' cache='false'/>
+			<script src='client\render\CCardRender.lua' type='client' cache='false'/>
+			<script src='client\render\CEffects.lua' type='client' cache='false'/>
+			<script src='client\render\CMessageBox.lua' type='client' cache='false'/>
+			<script src='client\render\CMotionBlur.lua' type='client' cache='false'/>
+			<script src='client\render\CWinText.lua' type='client' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\sound -->
+			<script src='client\sound\CSoundManager.lua' type='client' cache='false'/>
+			<script src='client\sound\cWorldSounds.lua' type='client' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\texture -->
+			<script src='client\texture\CTextureReplacer.lua' type='client' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\utils -->
+			<script src='client\utils\CDevelopment.lua' type='client' cache='false'/>
+			<script src='client\utils\CEgo.lua' type='client' cache='false'/>
+			<script src='client\utils\CKeyBinds.lua' type='client' cache='false'/>
+			<script src='client\utils\CLogger.lua' type='client' cache='false'/>
+			<script src='client\utils\CObjectCreator.lua' type='client' cache='false'/>
+			
+			
+		<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files -->
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\fonts -->
+			<file src='files\fonts\FEASFBRG.TTF'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\images -->
+			<customfile src='files\images\4.jpg'/>
+			<customfile src='files\images\blood.png'/>
+			<customfile src='files\images\warning1.jpg'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\models -->
+			<customfile src='files\models\alien.dff'/>
+			<customfile src='files\models\alien.txd'/>
+			<customfile src='files\models\colt.dff'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\shaders -->
+			<customfile src='files\shaders\motion.fx'/>
+			<customfile src='files\shaders\oversize.fx'/>
+			<customfile src='files\shaders\texture.fx'/>
+			
+				<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\sounds\world -->
+				<customfile src='files\sounds\world\air_conditioner.ogg'/>
+				<customfile src='files\sounds\world\computer_noise.ogg'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\sounds -->
+			<customfile src='files\sounds\boom.mp3'/>
+			<customfile src='files\sounds\door_close.mp3'/>
+			<customfile src='files\sounds\door_open.mp3'/>
+			<customfile src='files\sounds\fuzzle.mp3'/>
+			<customfile src='files\sounds\HorrorAction2.mp3'/>
+			<customfile src='files\sounds\HorrorAction22.mp3'/>
+			<customfile src='files\sounds\key.mp3'/>
+			<customfile src='files\sounds\liege.mp3'/>
+			<customfile src='files\sounds\rolly.mp3'/>
+			<customfile src='files\sounds\schrank1.ogg'/>
+			<customfile src='files\sounds\scream1.mp3'/>
+			<customfile src='files\sounds\scream2.mp3'/>
+			<customfile src='files\sounds\static.mp3'/>
+			<customfile src='files\sounds\rawr.ogg'/>
+			<customfile src='files\sounds\failed.ogg'/>
+			
+			
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\music -->
+			<customfile src='files\music\mus_trt.mp3'/>
+			<customfile src='files\music\music2.ogg'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\textures -->
+			<file src='files\textures\colt.png'/>
+			
+			
+		<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\maps -->
+		<custommap src='maps\interior.map'/>
+		<custommap src='maps\scp-088-map.map'/>
+		
+		<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\server -->
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\server\entitys -->
+			<script src='server\utils\shared.utils.class.lua' type='server' cache='false'/>
+			
+			<script src='server\entitys\CPlayer.lua' type='server' cache='false'/>
+			<script src='server\entitys\CSpawnManager.lua' type='server' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\server\map -->
+			<script src='server\map\CMapLoader.lua' type='server' cache='false'/>
+			<script src='server\map\CDownloadManager.lua' type='server' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\server\utils -->
+			<script src='server\utils\CLogger.lua' type='server' cache='false'/>
+			<script src='server\utils\CSettings.lua' type='server' cache='false'/>
+			<script src='server\utils\CObjectCreator.lua' type='server' cache='false'/>
+			
+			
+			
 </meta>
+
+<!-- End of meta.xml file -->

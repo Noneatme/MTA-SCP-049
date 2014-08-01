@@ -11,5 +11,10 @@
 	<file src="objects/flashlight.txd" type="client" />
 	<file src="objects/flashlight.dff" type="client" />
 	<file src="sounds/switch.wav" type="client" />
+	
+	<export function="flashLightFlicker" type="client"/>
+	<export function="stopFlashLightFlicker" type="client"/>
+	
+	<export function="fadeToColor" type="client"/>
 	<include resource="bone_attach" />
 </meta>
