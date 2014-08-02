@@ -40,8 +40,8 @@ end
 -- ///// Returns: void		//////
 -- ///////////////////////////////
 
-function DownloadManager:RequestFiles()
-	triggerServerEvent("onDownloadManagerRequestFiles", localPlayer)
+function DownloadManager:RequestFiles(sType)
+	triggerServerEvent("onDownloadManagerRequestFiles", localPlayer, sType)
 end
 
 -- ///////////////////////////////
@@ -49,35 +49,39 @@ end
 -- ///// Returns: void		//////
 -- ///////////////////////////////
 
-function DownloadManager:RequestSucess(tblDownload, tblSize)
+function DownloadManager:RequestSucess(tblDownload, tblSize, tblCat, sRequestedCategory)
 	local needToDownload = {};
 	for index, key in pairs(tblDownload) do
-		if not(fileExists(key)) then
-			needToDownload[index] = key;
-		else
-			local file = fileOpen(key)
-			if(file) then
-				if(fileGetSize(file) ~= tblSize[key]) then
-					outputConsole(fileGetSize(file)..", "..tblSize[key])
-					needToDownload[index] = key;
-				end
-				fileClose(file);
-			else
+		if(tblCat[key] == sRequestedCategory) or (tblCat[key] == "-") then
+	
+			if not(fileExists(key)) then
 				needToDownload[index] = key;
+			else
+				local file = fileOpen(key)
+				if(file) then
+					if(fileGetSize(file) ~= tblSize[key]) then
+						outputConsole(fileGetSize(file)..", "..tblSize[key])
+						needToDownload[index] = key;
+					end
+					fileClose(file);
+				else
+					--needToDownload[index] = key;
+					outputConsole("File: "..key.." in use, can't check!")
+				end
 			end
 		end
 	end
-	outputConsole("Checking Download...");
+	outputConsole("Checking Download... (Category: "..sRequestedCategory..")");
 	outputConsole(table.length(needToDownload).." Files needed.")
 	
 	self.maxFile = table.length(needToDownload);
 
 	if(table.length(needToDownload) < 1) then
-		self:FinnishDownload();
+		self:FinnishDownload(sRequestedCategory);
 	else
 		self.downloading = true;
 	end
-	triggerServerEvent("onDownloadManagerRequestDownload", localPlayer, needToDownload)
+	triggerServerEvent("onDownloadManagerRequestDownload", localPlayer, needToDownload, sRequestedCategory)
 end
 
 -- ///////////////////////////////
@@ -85,10 +89,10 @@ end
 -- ///// Returns: void		//////
 -- ///////////////////////////////
 
-function DownloadManager:FinnishDownload()
-	outputConsole("Download Finnished, Total : "..math.round((self.totalByteDownload/1000)/1024, 2).." MB");
+function DownloadManager:FinnishDownload(sCat)
+	outputConsole("Download '"..sCat.."' finished, Total : "..math.round((self.totalByteDownload/1000)/1024, 2).." MB");
 	self.downloading = false;
-	triggerEvent("onClientDownloadFinnished", getLocalPlayer())
+	triggerEvent("onClientDownloadFinnished"..string.upper(sCat), getLocalPlayer())
 end
 
 -- ///////////////////////////////
@@ -96,7 +100,7 @@ end
 -- ///// Returns: void		//////
 -- ///////////////////////////////
 
-function DownloadManager:DownloadThis(path, data, current, last)
+function DownloadManager:DownloadThis(path, data, current, last, sRequestedCategory)
 	if(data ~= "false") then
 
 		self.downloading = true;
@@ -113,7 +117,7 @@ function DownloadManager:DownloadThis(path, data, current, last)
 		self.currentPath = "Download...";
 
 		if(current == last) then
-			self:FinnishDownload()
+			self:FinnishDownload(sRequestedCategory)
 		end
 		
 		self.currentFile = self.currentFile+1;
@@ -148,7 +152,7 @@ function DownloadManager:Render()
 		dxDrawRectangle(sx-(aesx-1170), 5, 260, 90, tocolor(0, 0, 0, 139), true)
 		
 		dxDrawText(self.currentPath, sx-(aesx-1180), 12, sx-(aesx-1422), 25, tocolor(255, 255, 255, 255), 1, "default-bold", "center", "top", false, false, true, false, false)
-
+	
 		local width = -245/self.totalByteDownload*self.currentByteDownload
 
 		if(width ~= "NaN") and (width ~= nil) and (width <= 0) then
@@ -157,6 +161,8 @@ function DownloadManager:Render()
 			
 		end
 		--
+		dxDrawImage( sx-(aesx-1180), 35, 30, 30, "files/images/loading.png", getTickCount()/5, 0, 0, tocolor(255, 255, 255, 255), true)
+	
 		dxDrawText(math.round(((self.totalByteDownload-self.currentByteDownload)/1000)/1024, 2).." MB / "..math.round((self.totalByteDownload/1000)/1024, 2).." MB", sx-(aesx-1180), 35, sx-(aesx-1422), 52, tocolor(255, 255, 255, 255), 1, "default-bold", "center", "center", false, false, true, false, false)
 		
 		dxDrawText(self.currentFile.." / "..self.maxFile.." files", sx-(aesx-1180), 72, sx-(aesx-1422), 75, tocolor(255, 255, 255, 255), 1, "default-bold", "center", "top", false, false, true, false, false)
@@ -197,7 +203,7 @@ function DownloadManager:Constructor(...)
 	addEventHandler("onDownloadManagerFinnishDownload", getLocalPlayer(), self.finnishDownloadFunc);
 	addEventHandler("onClientRender", getRootElement(), self.renderFunc)
 
-	self:RequestFiles();
+	
 	--logger:OutputInfo("[CALLING] DownloadManager: Constructor");
 
 	function math.round(number, decimals, method)

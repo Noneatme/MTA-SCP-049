@@ -146,6 +146,16 @@ function Player:SendMapContent(dim)
 	return mapLoader:LoadResourceMap(self, dim);
 end	
 
+-- SET ID
+function Player:SetID(iID)
+	self.iID	= iID;
+end
+
+-- GET ID
+function Player:GetID()
+	return self.iID
+end
+
 -- ///////////////////////////////
 -- ///// Constructor 		//////
 -- ///////////////////////////////

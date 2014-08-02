@@ -84,7 +84,7 @@ function KeyBinds:CheckElement()
 					destroyElement(object);
 					setElementData(doors.doors[index], "locked", false, false);
 					messageBox:Show("You picked up a key:\nKey for "..name, {255, 255, 255}, {0, 255, 0})
-					soundManager:PlaySound("files/sounds/key.mp3", false, "sounds");
+					soundManager:PlaySound("files/sounds/key.ogg", false, "sounds");
 					
 					trigger:CheckForMusic(index);
 				end
@@ -109,6 +109,11 @@ function KeyBinds:CheckElement()
 					else
 						doors:CloseDoor(tonumber(getElementData(object, "door_index")));
 
+					end
+				else
+					if not(isElement(self.lockedDoorSound)) then
+						self.lockedDoorSound 	= 	soundManager:PlaySound("files/sounds/locked_door.ogg", false, "sounds");
+						setSoundVolume(self.lockedDoorSound, 0.5);
 					end
 				end
 				break;

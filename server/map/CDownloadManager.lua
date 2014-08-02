@@ -37,7 +37,7 @@ end
 -- ///////////////////////////////
 
 function DownloadManager:OnRequestFiles(player, ...)
-	triggerClientEvent(player, "onDownloadManagerRequestFileSucess", player, self.downloadTable, self.sizeTable);
+	triggerClientEvent(player, "onDownloadManagerRequestFileSucess", player, self.downloadTable, self.sizeTable, self.typeTable, ...);
 
 end
 
@@ -53,14 +53,16 @@ function DownloadManager:LoadFiles()
 	if(metaRoot) then
 		for i, v in ipairs(xmlNodeGetChildren(metaRoot)) do
 			if(xmlNodeGetName(v) == "customfile") then
-				local path 		= xmlNodeGetAttribute(v,"src")
+				local path 		= xmlNodeGetAttribute(v,"src");
+				local typ 		= xmlNodeGetAttribute(v,"type");
+				
 				local file 		= fileOpen(path);
 				if(file) then
 					self.downloadTable[i] = path;
 					self.sizeTable[path] = fileGetSize(file);
-	
 					self.dataTable[path] = fileRead(file, fileGetSize(file));
-	
+					self.typeTable[path] = (typ or "-");
+					
 					fileClose(file);
 				else
 					outputDebugString("WARNING: Bad File: "..path)
@@ -79,7 +81,7 @@ end
 -- ///// Returns: void		//////
 -- ///////////////////////////////
 
-function DownloadManager:RequestDownload(player, tblDownload)
+function DownloadManager:RequestDownload(player, tblDownload, sRequestedCategory)
 	local bytes = 0;
 
 
@@ -92,7 +94,7 @@ function DownloadManager:RequestDownload(player, tblDownload)
 	local current = 1;
 	
 	for index, path in pairs(tblDownload) do
-		triggerLatentClientEvent(player, "onDownloadManagerStartDownload", self.bytesPerSecond, false, player, path, (self.dataTable[path] or "false"), current, last)
+		triggerLatentClientEvent(player, "onDownloadManagerStartDownload", self.bytesPerSecond, false, player, path, (self.dataTable[path] or "false"), current, last, sRequestedCategory)
 		
 		current = current+1;
 	end
@@ -110,7 +112,8 @@ function DownloadManager:Constructor(...)
 	self.downloadTable			= {}
 	self.sizeTable				= {}
 	self.dataTable				= {}
-
+	self.typeTable				= {}
+	
 	self.bytesPerSecond			= 2000000; -- Uebertragungsrate
 
 

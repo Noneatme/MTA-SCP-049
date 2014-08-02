@@ -12,35 +12,31 @@ local cFunc = {};		-- Local Functions
 local cSetting = {};	-- Local Settings
 
 addEvent("onDimensionGet", true)
+addEvent("onClientDownloadFinnished", true)
+	
 
-cFunc["join"] = function()
-	triggerServerEvent("onPlayerJoin2", getLocalPlayer())
-end
 
 -- EVENT HANDLER --
 
 
 do
-	logger = Logger:New();
-	soundManager = SoundManager:New();
+	logger 						= Logger:New();
+	soundManager 				= SoundManager:New();
 	
 	soundManager:AddCategory("music");
 	soundManager:AddCategory("sounds");
-	
-	mapLoader = MapLoader:New();
-	
-	ego = Ego:New();
-	ego:Start();
-	
-	messageBox = MessageBox:New();
-	messageBox:Show("Please wait for your download to finish.", {255, 255, 255}, {0, 255, 0}, 7500);
+	soundManager:AddCategory("worldsounds");
 		
-	downloadManager 		= DownloadManager:New();
+	mapLoader 					= MapLoader:New();
+	ego 						= Ego:New();
+	downloadManager 			= DownloadManager:New();
 	
-	addEvent("onClientDownloadFinnished", true)
+	mainMenu					= MainMenu:New();
+	mainMenu:Show();
+	
+	--[[
 	addEventHandler("onClientDownloadFinnished", localPlayer, function()
 	
-		cFunc["join"]();
 	
 		textureReplacer = TextureReplacer:New()
 	
@@ -69,6 +65,7 @@ do
 		--	motionBlur:AddEffect()
 		end, 2000, 1)
 	end)
+	]]
 end
 
 
@@ -80,7 +77,6 @@ cFunc["get_dimension"] = function(dim)
 	trigger 		= Trigger:New();
 	development 	= Development:New();
 	alien 			= Alien:New();
-	effects 		= Effects:New();
 	worldSounds		= WorldSounds:New();
 		
 	setPedTargetingMarkerEnabled(false);

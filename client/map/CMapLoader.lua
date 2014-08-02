@@ -71,6 +71,32 @@ function MapLoader:OnServerSendMapContent( mapContent )
 	end
 end
 
+-- ////////////////////////////////
+-- DESTROY EVERYTHING 
+-- ///////////////////////////////
+
+function MapLoader:DestroyEverything()
+	for index, sound in pairs(getElementsByType("sound", getResourceRootElement())) do
+		destroyElement(sound)
+	end
+	
+	for index, ele in pairs(getElementsByType("object", getResourceRootElement())) do
+		destroyElement(ele);
+	end
+	
+	for index, ele in pairs(getElementsByType("marker", getResourceRootElement())) do
+		destroyElement(ele);
+	end
+	
+	for index, ele in pairs(getElementsByType("ped", getResourceRootElement())) do
+		destroyElement(ele);
+	end
+	
+	for index, ele in pairs(getElementsByType("colshape", getResourceRootElement())) do
+		destroyElement(ele);
+	end
+end
+
 -- ///////////////////////////////
 -- ///// Constructor 		//////
 -- ///// Returns: void		//////

@@ -2,7 +2,7 @@
 <!-- Generation Date: 01.08.2014 20:37:16 -->
 <meta>
 	<!-- Info line -->
-	<info author='Noneatme' version='1.5.0' type='gamemode' name='SCP-049' description='The SCP-049 Gamemode for MTA:SA'/>
+	<info author='Noneatme' version='1.7.0' type='gamemode' name='SCP-049' description='The SCP-049 Gamemode for MTA:SA'/>
 	
 	<!-- Meta settings -->
 	<oop>false</oop>
@@ -19,6 +19,9 @@
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\entitys -->
 			<script src='client\entitys\CAlien.lua' type='client' cache='false'/>
 			<script src='client\entitys\CDoors.lua' type='client' cache='false'/>
+			
+			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\gameplay -->
+			<script src='client\gameplay\cMainMenu.lua' type='client' cache='false'/>
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\client\map -->
 			<script src='client\map\CMapLoader.lua' type='client' cache='false'/>
@@ -50,52 +53,86 @@
 			
 		<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files -->
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\fonts -->
-			<file src='files\fonts\FEASFBRG.TTF'/>
+			<customfile src='files\fonts\FEASFBRG.TTF' type='mainmenu'/>
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\images -->
-			<customfile src='files\images\4.jpg'/>
-			<customfile src='files\images\blood.png'/>
-			<customfile src='files\images\warning1.jpg'/>
+			<customfile src='files\images\4.jpg' type='game'/>
+			<customfile src='files\images\blood.png' type='game'/>
+			<customfile src='files\images\warning1.jpg' type='game'/>
+			<file src='files\images\loading.png'/>
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\models -->
-			<customfile src='files\models\alien.dff'/>
-			<customfile src='files\models\alien.txd'/>
-			<customfile src='files\models\colt.dff'/>
+			<customfile src='files\models\alien.dff' type='game'/>
+			<customfile src='files\models\alien.txd' type='game'/>
+			<customfile src='files\models\colt.dff' type='game'/>
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\shaders -->
-			<customfile src='files\shaders\motion.fx'/>
-			<customfile src='files\shaders\oversize.fx'/>
-			<customfile src='files\shaders\texture.fx'/>
+			<customfile src='files\shaders\motion.fx' type='game'/>
+			<customfile src='files\shaders\oversize.fx' type='game'/>
+			<customfile src='files\shaders\texture.fx' type='game'/>
 			
 				<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\sounds\world -->
-				<customfile src='files\sounds\world\air_conditioner.ogg'/>
-				<customfile src='files\sounds\world\computer_noise.ogg'/>
+				<customfile src='files\sounds\world\air_conditioner.ogg' type='game'/>
+				<customfile src='files\sounds\world\computer_noise.ogg' type='game'/>
+			
+				<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\sounds\light_flicker -->
+				<customfile src='files\sounds\light_flicker\light_flicker_02.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_03.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_04.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_05.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_06.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_07.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_09.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_10.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_13.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_14.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_15.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_17.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_18.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_19.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_20.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_21.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_24.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_26.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_28.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_29.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_30.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_end_01.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_end_02.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_end_01.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_end_03.ogg' type='mainmenu'/>
+				<customfile src='files\sounds\light_flicker\light_flicker_end_04.ogg' type='mainmenu'/>
+	
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\sounds -->
-			<customfile src='files\sounds\boom.mp3'/>
-			<customfile src='files\sounds\door_close.mp3'/>
-			<customfile src='files\sounds\door_open.mp3'/>
-			<customfile src='files\sounds\fuzzle.mp3'/>
-			<customfile src='files\sounds\HorrorAction2.mp3'/>
-			<customfile src='files\sounds\HorrorAction22.mp3'/>
-			<customfile src='files\sounds\key.mp3'/>
-			<customfile src='files\sounds\liege.mp3'/>
-			<customfile src='files\sounds\rolly.mp3'/>
-			<customfile src='files\sounds\schrank1.ogg'/>
-			<customfile src='files\sounds\scream1.mp3'/>
-			<customfile src='files\sounds\scream2.mp3'/>
-			<customfile src='files\sounds\static.mp3'/>
-			<customfile src='files\sounds\rawr.ogg'/>
-			<customfile src='files\sounds\failed.ogg'/>
+			<customfile src='files\sounds\boom.ogg' type='game'/>
+			<customfile src='files\sounds\door_close.ogg' type='game'/>
+			<customfile src='files\sounds\door_open.ogg' type='game'/>
+			<customfile src='files\sounds\fuzzle.ogg' type='game'/>
+			<customfile src='files\sounds\HorrorAction2.ogg' type='game'/>
+			<customfile src='files\sounds\HorrorAction22.ogg' type='game'/>
+			<customfile src='files\sounds\key.ogg' type='game'/>
+			<customfile src='files\sounds\liege.ogg' type='game'/>
+			<customfile src='files\sounds\rolly.ogg' type='game'/>
+			<customfile src='files\sounds\schrank1.ogg' type='game'/>
+			<customfile src='files\sounds\scream1.ogg' type='game'/>
+			<customfile src='files\sounds\scream2.ogg' type='game'/>
+			<customfile src='files\sounds\static.ogg' type='game'/>
+			<customfile src='files\sounds\rawr.ogg' type='game'/>
+			<customfile src='files\sounds\failed.ogg' type='game'/>
+			<customfile src='files\sounds\locked_door.ogg' type='game'/>
+			
 			
 			
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\music -->
-			<customfile src='files\music\mus_trt.mp3'/>
-			<customfile src='files\music\music2.ogg'/>
+			<customfile src='files\music\mus_trt.ogg' type='game'/>
+			<customfile src='files\music\music2.ogg' type='game'/>
+			<customfile src='files\music\game_menu.ogg' type='mainmenu'/>
+			<customfile src='files\music\att_brute.ogg' type='game'/>
 			
 			<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\files\textures -->
-			<file src='files\textures\colt.png'/>
+			<customfile src='files\textures\colt.png' type='game'/>
 			
 			
 		<!-- Folder: F:\Google Drive\MTA 1.3 Server\server\mods\deathmatch\resources\[gamemodes]\scp-049\maps -->

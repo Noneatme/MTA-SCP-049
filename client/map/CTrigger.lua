@@ -56,13 +56,14 @@ function Trigger:CheckForMusic(index)
 		
 		alien:Appear(335.32077026367, 185.11631774902, 1014.1875, 180, false, true);
 		
-		
 		self.thisFunc = function()
-				local s = soundManager:PlaySound3D("files/sounds/HorrorAction22.mp3", 336.82791137695, 181.82263183594, 1014.1875, false, "sounds");
+				local s = soundManager:PlaySound3D("files/sounds/HorrorAction22.ogg", 336.82791137695, 181.82263183594, 1014.1875, false, "sounds");
 				setSoundMaxDistance(s, 50);
 				--motionBlur:AddBlur(10000)
 				motionBlur:AddEffect()
 				alien:ChaseLocalPlayer()
+				
+				self:PlayMusic(3);
 				
 				removeEventHandler("onElementScreenStarted", alien.alien, self.thisFunc)
 			end
@@ -82,11 +83,25 @@ function Trigger:PlayMusic(level)
 	end
 	
 	if(level == 2) then
-		self.music = soundManager:PlaySound(self.musicPath.."mus_trt.mp3", false, "music");
+		self.music = soundManager:PlaySound(self.musicPath.."mus_trt.ogg", false, "music");
 		soundManager:SetCategoryVolume("music", 0.4);
 		
 		motionBlur:AddBlur()
 	end
+	if(level == 3) then
+		self.music = soundManager:PlaySound(self.musicPath.."att_brute.ogg", true, "music");
+		soundManager:SetCategoryVolume("music", 0.4);
+		
+	end	
+end
+
+-- ///////////////////////////////
+-- ///// destroyMusic	 		//////
+-- ///// Returns: void		//////
+-- ///////////////////////////////
+
+function Trigger:DestroyMusic()
+	destroyElement(self.music);
 end
 
 -- ///////////////////////////////
@@ -102,7 +117,7 @@ function Trigger:DoWin()
 		self.thisFunc = function()
 			local x, y, z = getElementPosition(localPlayer)
 		
-			local s = soundManager:PlaySound3D("files/sounds/HorrorAction22.mp3", x, y, z, false, "sounds");
+			local s = soundManager:PlaySound3D("files/sounds/HorrorAction22.ogg", x, y, z, false, "sounds");
 			setSoundMaxDistance(s, 50);
 			motionBlur:AddEffect()
 
@@ -150,10 +165,11 @@ function Trigger:PlayDoorTrigger(index)
 			alien:Appear(329.08306884766, 154.69798278809, 1014.1875, 288)
 			
 			self.thisFunc = function()
-				local s = soundManager:PlaySound3D("files/sounds/boom.mp3", 329.08306884766, 154.69798278809, 1014.1875, false, "sounds");
+				local s = soundManager:PlaySound3D("files/sounds/boom.ogg", 329.08306884766, 154.69798278809, 1014.1875, false, "sounds");
 				setSoundMaxDistance(s, 50);
 				--motionBlur:AddBlur(10000)
 				motionBlur:AddEffect()
+				
 				setTimer(function()
 					alien:Disappear()
 					
@@ -204,7 +220,7 @@ function Trigger:CreateTriggerElements()
 	
 	self.ele.rolly = createObject(1789, 335.25213623047, 172.41461181641, 1019.5405883789, 0, 0, 90)
 	
-	self.ele.staticsound = soundManager:PlaySound3D("files/sounds/static.mp3", 322.28359985352, 183.37240600586, 1013.8850097656, true, "sounds")
+	self.ele.staticsound = soundManager:PlaySound3D("files/sounds/static.ogg", 322.28359985352, 183.37240600586, 1013.8850097656, true, "sounds")
 	setSoundVolume(self.ele.staticsound, 0.5);
 
 	
@@ -267,7 +283,7 @@ end
 
 function Trigger:PlayTrigger(index)
 	if(index == 1) then
-		local s = soundManager:PlaySound3D("files/sounds/scream1.mp3", 379.5212097168, 162.10943603516, 1014.1875, false, "sounds");
+		local s = soundManager:PlaySound3D("files/sounds/scream1.ogg", 379.5212097168, 162.10943603516, 1014.1875, false, "sounds");
 		setElementDimension(s, getElementDimension(localPlayer))
 		setElementInterior(s, getElementInterior(localPlayer))
 		setSoundMaxDistance(s, 50);
@@ -321,7 +337,7 @@ function Trigger:Constructor(...)
 	
 	self.moveLiegeFunc = function()
 		moveObject(self.ele.liege, 10000, 366.98371582031, 172.36854553223, 1018.984375, 0, 0, 0, "OutQuad")
-		local s = soundManager:PlaySound3D("files/sounds/liege.mp3", 366.18371582031, 172.36854553223, 1018.984375, false, "sounds");
+		local s = soundManager:PlaySound3D("files/sounds/liege.ogg", 366.18371582031, 172.36854553223, 1018.984375, false, "sounds");
 		attachElements(s, self.ele.liege);
 		setSoundMaxDistance(s, 50);
 	--	motionBlur:AddBlur(5000, 0.005)
@@ -353,7 +369,7 @@ function Trigger:Constructor(...)
 			end, 100*8, 1)
 		end
 		
-		local s = soundManager:PlaySound3D("files/sounds/HorrorAction22.mp3", 346.78454589844, 165.34469604492, 1014.1875, false, "sounds");
+		local s = soundManager:PlaySound3D("files/sounds/HorrorAction22.ogg", 346.78454589844, 165.34469604492, 1014.1875, false, "sounds");
 		setSoundMaxDistance(s, 50);
 		
 		motionBlur:AddBlur(10000)
@@ -366,7 +382,7 @@ function Trigger:Constructor(...)
 		alien:Appear(354.07373046875, 170.25527954102, 1019.984375, 180);
 		
 		self.thisFunc = function()
-			local s = soundManager:PlaySound3D("files/sounds/boom.mp3", 354.07373046875, 170.25527954102, 1019.984375, false, "sounds");
+			local s = soundManager:PlaySound3D("files/sounds/boom.ogg", 354.07373046875, 170.25527954102, 1019.984375, false, "sounds");
 			setSoundMaxDistance(s, 50);
 			motionBlur:AddBlur(10000)
 			motionBlur:AddEffect()
@@ -387,7 +403,7 @@ function Trigger:Constructor(...)
 	self.rollyFunc = function(so)
 		if(getElementData(doors.doors[6], "locked") == false) then
 			moveObject(self.ele.rolly, 3000, 335.25213623047, 177.31280517578, 1019.5405883789, 0, 0, 0, "OutQuad")
-			local s = soundManager:PlaySound3D("files/sounds/rolly.mp3", 335.25213623047, 177.31280517578, 1019.5405883789, false, "sounds");
+			local s = soundManager:PlaySound3D("files/sounds/rolly.ogg", 335.25213623047, 177.31280517578, 1019.5405883789, false, "sounds");
 			setSoundMaxDistance(s, 50);
 			attachElements(s, self.ele.rolly)
 			
@@ -406,10 +422,11 @@ function Trigger:Constructor(...)
 			alien:Appear(364.30459594727, 182.78366088867, 1008.3828125, 201, false, false);
 			
 			self.thisFunc = function()
-				local s = soundManager:PlaySound3D("files/sounds/HorrorAction2.mp3", 366.99230957031, 178.576171875, 1008.3828125, false, "sounds");
+				local s = soundManager:PlaySound3D("files/sounds/HorrorAction2.ogg", 366.99230957031, 178.576171875, 1008.3828125, false, "sounds");
 				setSoundMaxDistance(s, 50);
 				alien:ChaseLocalPlayer()
 				motionBlur:AddEffect()
+				
 				exports["shader_flashlight_test"]:flashLightFlicker(10^10);
 				exports["shader_flashlight_test"]:fadeToColor({255, 0, 0, 200}, 10^10, 5);
 		
@@ -437,7 +454,7 @@ function Trigger:Constructor(...)
 		exports["shader_flashlight_test"]:flashLightFlicker(5000);
 		
 		self.thisFunc = function()
-			--local s = soundManager:PlaySound3D("files/sounds/boom.mp3", 354.07373046875, 170.25527954102, 1019.984375, false, "sounds");
+			--local s = soundManager:PlaySound3D("files/sounds/boom.ogg", 354.07373046875, 170.25527954102, 1019.984375, false, "sounds");
 			--setSoundMaxDistance(s, 50);
 			--motionBlur:AddBlur(10000)
 			setTimer(function()
@@ -452,7 +469,7 @@ function Trigger:Constructor(...)
 				setPedRotation(alien.alien, rot+270)
 				
 				setTimer(function()
-					local s = soundManager:PlaySound3D("files/sounds/HorrorAction2.mp3", x, y, z, false, "sounds");
+					local s = soundManager:PlaySound3D("files/sounds/HorrorAction2.ogg", x, y, z, false, "sounds");
 					setSoundMaxDistance(s, 50);
 					
 					
@@ -474,7 +491,7 @@ function Trigger:Constructor(...)
 	
 	self.sparksFunc = function()
 		effects:AddSparksWorkingRoom()
-		local s = soundManager:PlaySound3D("files/sounds/fuzzle.mp3", 328.59994506836, 168.17735290527, 1015.413757324, true, "sounds");
+		local s = soundManager:PlaySound3D("files/sounds/fuzzle.ogg", 328.59994506836, 168.17735290527, 1015.413757324, true, "sounds");
 		setSoundMaxDistance(s, 20);
 		setSoundVolume(s, 0.5)
 		

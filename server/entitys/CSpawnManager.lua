@@ -42,8 +42,33 @@ function SpawnManager:JoinPlayer(player)
 		player = source;
 	end
 	
-	enew(player, Player)
-	spawnPlayer(player, self.spawnPos[1], self.spawnPos[2], self.spawnPos[3], 90, 60, 3, self.lastID);
+	if not(player.iID) then
+		enew(player, Player)
+		spawnPlayer(player, self.spawnPos[1], self.spawnPos[2], self.spawnPos[3], 90, 60, 3, player:GetID());
+		giveWeapon(player, 22, 999, true);
+	end
+	
+	local id = self.lastID;
+	
+	if(player:GetID()) then
+		id = player:GetID();
+	else	
+		self.lastID = self.lastID+1;
+	end
+	
+	player:SendMapContent(id);
+	player:SetID(id);
+
+end
+
+-- ///////////////////////////////
+-- ///// SpawnPlayer 		//////
+-- ///// Returns: void		//////
+-- ///////////////////////////////
+
+function SpawnManager:SpawnPlayer(player)
+
+	spawnPlayer(player, self.spawnPos[1], self.spawnPos[2], self.spawnPos[3], 90, 60, 3, player:GetID());
 	
 	fadeCamera(player, true);
 	setCameraTarget(player, player);
@@ -51,10 +76,7 @@ function SpawnManager:JoinPlayer(player)
 	
 	giveWeapon(player, 22, 999, true);
 	
-	player:SendMapContent(self.lastID);
-	
-	triggerClientEvent(player, "onDimensionGet", player, self.lastID);
-	self.lastID = self.lastID+1;
+	triggerClientEvent(player, "onDimensionGet", player, player:GetID());
 end
 
 -- ///////////////////////////////
@@ -64,14 +86,16 @@ end
 
 function SpawnManager:Constructor(...)
 	self.joinFunc = function(...) self:JoinPlayer(...) end;
-	
+	self.joinSpawnFunc	= function(...) self:SpawnPlayer(...) end;
 	self.spawnPos = {390.04821777344, 173.9736328125, 1008.3828125};
 	
 	self.lastID = 1;
 	
 	addEvent("onPlayerJoin2", true);
+	addEvent("onPlayerJoinSpawn", true);
 	
 	addEventHandler("onPlayerJoin2", getRootElement(), self.joinFunc);
+	addEventHandler("onPlayerJoinSpawn", getRootElement(), self.joinSpawnFunc);
 
 	logger:OutputInfo("[CALLING] SpawnManager: Constructor");
 end

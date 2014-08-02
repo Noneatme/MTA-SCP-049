@@ -37,7 +37,7 @@ end
 -- ///////////////////////////////
 
 function Alien:Disappear(bForce)
-	if(self.chasingFailing ~= true) or (bForce == true) then
+	if(self.chasingFailing ~= true) or (bForce == true) and (isElement(self.alien)) then
 		setElementPosition(self.alien, 0, 0, -100)
 		
 		setElementFrozen(self.alien, true)
@@ -79,6 +79,13 @@ function Alien:ChaseLocalPlayer(fast)
 		end
 		
 		self.chasFunc = function()		
+					
+			if not(isElement(self.alien)) then
+				killTimer(self.chaseTimer)
+				self = nil;
+				return
+			end
+			
 			local x1, y1 = getElementPosition(self.alien)
 			local x2, y2 = getElementPosition(localPlayer)
 			local rot = math.atan2(y2 - y1, x2 - x1) * 180 / math.pi
@@ -90,6 +97,7 @@ function Alien:ChaseLocalPlayer(fast)
 				w = "wat"
 			end
 			self:MoveToPosition(x2, y2, 0, false, w);
+
 		end
 	
 		self.chaseTimer = setTimer(self.chasFunc, 100, -1)
@@ -154,7 +162,6 @@ end
 
 
 function Alien:ColHit(id, hitElement, bDim)
-	outputChatBox(id..", "..tostring(hitElement)..", "..tostring(bDim))
 	if(bDim) and (hitElement == localPlayer) then
 		if(self.bColShapeEnabled) then
 			-- id: 	1 - Near

@@ -39,7 +39,6 @@ end
 function WorldSounds:GenerateSounds()
 	self.soundEle		= {}
 	
-	soundManager:AddCategory("worldsounds");
 	soundManager:SetCategoryVolume("worldsounds", 0.7)
 	
 	for soundName, positions in pairs(self.sounds) do
@@ -61,7 +60,6 @@ function WorldSounds:GenerateSounds()
 			end
 		end
 	end
-
 end
 
 -- ///////////////////////////////

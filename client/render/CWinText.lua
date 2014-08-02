@@ -48,13 +48,17 @@ end
 -- ///////////////////////////////
 
 function WinText:Constructor(bBool)
+	ego:Stop();
+	mapLoader:DestroyEverything()
+	exports["shader_flashlight_test"]:stopFade();
+		
+	setElementPosition(localPlayer, 0, 0, 0)
+	setElementFrozen(localPlayer, true);
+	
 	self.renderFunc = function()
 		self:Render()
 	end
 
-	soundManager:SetCategoryVolume("music", 0);
-	soundManager:SetCategoryVolume("sounds", 0);
-	soundManager:SetCategoryVolume("worldsounds", 0);
 	
 	addEventHandler("onClientRender", getRootElement(), self.renderFunc)
 	
@@ -63,11 +67,19 @@ function WinText:Constructor(bBool)
 		soundManager:PlaySound("files/sounds/failed.ogg", false, "sounds");
 		
 		setTimer(function()
-			messageBox:Show("You failed. The alien killed you.\nRooms visited: "..doors.doorsOpened.." / "..(#doors.doors-3), {255, 255, 255}, {255, 0, 0}, 10^10)
+			mainMenu:Show();
+			messageBox:Show("You failed. The alien killed you.\nRooms visited: "..doors.doorsOpened.." / "..(#doors.doors-3), {255, 255, 255}, {255, 0, 0}, 10000)
+			removeEventHandler("onClientRender", getRootElement(), self.renderFunc)
+	
 		end, 5000, 1)
 	else
-		messageBox:Show("You made it! Thanks for Playing!\nRooms visited: "..doors.doorsOpened.." / "..(#doors.doors-3), {255, 255, 255}, {0, 255, 0}, 10^10)
+		messageBox:Show("You made it! Thanks for Playing!\nRooms visited: "..doors.doorsOpened.." / "..(#doors.doors-3), {255, 255, 255}, {0, 255, 0}, 10000)
+		removeEventHandler("onClientRender", getRootElement(), self.renderFunc)
+		mainMenu:Show();
+			
 	end
+	
+	
 	logger:OutputInfo("[CALLING] WinText: Constructor");
 end
 

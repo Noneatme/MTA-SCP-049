@@ -43,7 +43,7 @@ function Doors:OpenDoor(index)
 			local movex, movey, movez, moverx, movery, moverz = self.doorPos[index][8], self.doorPos[index][9], self.doorPos[index][10], self.doorPos[index][11], self.doorPos[index][12], self.doorPos[index][13]
 			moveObject(self.doors[index], 1000, movex, movey, movez, moverx, movery, moverz, "OutBounce");
 			self.doorMoving[index] = true;
-			local s = soundManager:PlaySound3D("files/sounds/door_open.mp3", movex, movey, movez, false, "sounds");
+			local s = soundManager:PlaySound3D("files/sounds/door_open.ogg", movex, movey, movez, false, "sounds");
 			setElementInterior(s, getElementInterior(localPlayer))
 			setElementDimension(s, getElementDimension(localPlayer))
 			setTimer(function()
@@ -76,7 +76,7 @@ function Doors:CloseDoor(index)
 		local movex, movey, movez, moverx, movery, moverz = self.doorPos[index][1], self.doorPos[index][2], self.doorPos[index][3], self.doorPos[index][4], self.doorPos[index][5], self.doorPos[index][6]
 		moveObject(self.doors[index], 1000, movex, movey, movez, moverx, movery, -90, "OutBounce");
 		self.doorMoving[index] = true;
-		local s = soundManager:PlaySound3D("files/sounds/door_close.mp3", movex, movey, movez, false, "sounds");
+		local s = soundManager:PlaySound3D("files/sounds/door_close.ogg", movex, movey, movez, false, "sounds");
 		setElementInterior(s, getElementInterior(localPlayer))
 		setElementDimension(s, getElementDimension(localPlayer))
 		setTimer(function()
