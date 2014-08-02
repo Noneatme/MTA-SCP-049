@@ -106,9 +106,9 @@ end
 
 function createFlashlightModel(thisPed)
 
-if not flashlight[thisPed] then	
-	flashlight[thisPed] = createObject(objID,0,0,0,0,0,0,true)
-	exports.bone_attach:attachElementToBone(flashlight[thisPed],thisPed,12,0, 0.015,0.2,0,0,0) 
+	if not flashlight[thisPed] then	
+		flashlight[thisPed] = createObject(objID,0,0,0,0,0,0,true)
+		exports.bone_attach:attachElementToBone(flashlight[thisPed],thisPed,12,0, 0.015,0.2,0,0,0) 
 	end
 end
 
@@ -290,12 +290,16 @@ function fadeFLColor()
 	
 	dxSetShaderValue (shader_jaroovka[localPlayer],"lightColor",color)
 	dxSetShaderValue (shader_rays[localPlayer],"lightColor",color)
-	dxSetShaderValue ( light_shader[localPlayer],"lightColor",color)
+	dxSetShaderValue (light_shader[localPlayer],"lightColor",color)
 	
 	
 	if(curR == cr and curG == cg and curB == cb and curA == ca) then
 		removeEventHandler("onClientRender", root, fadeFLColor);
 	end	
+end
+
+function stopFade()
+	removeEventHandler("onClientRender", root, fadeFLColor);
 end
 
 

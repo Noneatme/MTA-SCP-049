@@ -123,6 +123,10 @@ addEventHandler( "onClientResourceStart", resourceRoot,
 )
 
 
+function setBrightness(brightness)
+	return dxSetShaderValue( creepyLightShader,"stBrightness", brightness)
+end
+
 -----------------------------------------------------------------------------------
 -- onClientHUDRender
 -----------------------------------------------------------------------------------
